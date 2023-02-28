@@ -24,8 +24,8 @@ fs.readdirSync(path.join(__dirname, "models"))
 const { Activity, Country } = sequelize.models;
 
 // Relaciones
-Activity.belongsToMany(Country, { through: "CountryActivities" });
-Country.belongsToMany(Activity, { through: "CountryActivities" });
+Activity.belongsToMany(Country, { through: "country_activities" });
+Country.belongsToMany(Activity, { through: "country_activities" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Country, Activity } = require('./db.js');
