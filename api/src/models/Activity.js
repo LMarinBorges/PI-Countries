@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
       },
       season: {
         type: DataTypes.SMALLINT,
+        allowNull: false,
         validate: {
           min: 0,
           max: 3,
