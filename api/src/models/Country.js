@@ -26,6 +26,7 @@ module.exports = (sequelize) => {
       },
       capital: {
         type: DataTypes.STRING,
+        defaultValue: "Ninguna",
         allowNull: false,
       },
       subregion: {
