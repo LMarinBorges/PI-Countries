@@ -20,7 +20,7 @@
 const server = require("./src/app.js");
 const { conn, Country } = require("./src/db.js");
 
-async function seedDatabase() {
+const seedDatabase = async () => {
   // check if database has been seeded, and bail if it has been
   const countryCount = await Country.count();
   if (countryCount > 0) return;
@@ -42,13 +42,13 @@ async function seedDatabase() {
 
   console.log("Seeding database...");
   await Country.bulkCreate(rows);
-}
+};
 
-function startServer() {
+const startServer = () => {
   server.listen(3001, () => {
     console.log("Server listening at port 3001.");
   });
-}
+};
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(seedDatabase).then(startServer);
