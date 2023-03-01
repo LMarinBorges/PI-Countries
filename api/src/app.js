@@ -24,6 +24,11 @@ server.use((_req, res, next) => {
 
 server.use("/", routes);
 
+// 404 handler
+server.use("*", (_req, res) => {
+  res.sendStatus(404);
+});
+
 // Error catching endware.
 server.use((err, _req, res, _next) => {
   const status = err.status || 500;
