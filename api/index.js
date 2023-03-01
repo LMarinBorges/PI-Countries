@@ -17,12 +17,38 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const server = require("./src/app.js");
+const { conn, Country } = require("./src/db.js");
+
+async function seedDatabase() {
+  // check if database has been seeded, and bail if it has been
+  const countryCount = await Country.count();
+  if (countryCount > 0) return;
+
+  console.log("Fetching country data from API...");
+  const response = await fetch("https://restcountries.com/v3/all");
+  if (!response.ok) throw new Error("failed to fetch from countries API");
+  const countryData = await response.json();
+  const rows = countryData.map((country) => ({
+    id: country.cca3,
+    name: country.name.common,
+    flagUrl: country.flags[0],
+    continent: country.continents[0],
+    capital: country.capital?.[0],
+    subregion: country.subregion,
+    area: country.area,
+    population: country.population,
+  }));
+
+  console.log("Seeding database...");
+  await Country.bulkCreate(rows);
+}
+
+function startServer() {
+  server.listen(3001, () => {
+    console.log("Server listening at port 3001.");
+  });
+}
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
-});
+conn.sync({ force: true }).then(seedDatabase).then(startServer);
