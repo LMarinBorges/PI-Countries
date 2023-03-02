@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { conn, Country } = require("./src/db.js");
+const { sequelize, Country } = require("./src/db.js");
 
 const seedDatabase = async () => {
   // check if database has been seeded, and bail if it has been
@@ -51,4 +51,4 @@ const startServer = () => {
 };
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(seedDatabase).then(startServer);
+sequelize.sync({ force: true }).then(seedDatabase).then(startServer);
