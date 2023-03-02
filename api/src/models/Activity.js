@@ -28,6 +28,6 @@ module.exports = (sequelize) => {
         },
       },
     },
-    { tableName: "activities", underscored: true }
+    { tableName: "activities" }
   );
 };

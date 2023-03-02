@@ -38,6 +38,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    { tableName: "countries", underscored: true }
+    { tableName: "countries" }
   );
 };
