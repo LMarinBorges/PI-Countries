@@ -22,19 +22,21 @@ server.use((_req, res, next) => {
   next();
 });
 
+// Rutas de la API.
 server.use("/", routes);
 
-// 404 handler
-server.use("*", (_req, res) => {
-  res.sendStatus(404);
-});
+// Handler para errores 404.
+server.use("*", (_req, res) => notFound(res, "Page not found."));
 
-// Error catching endware.
-server.use((err, _req, res, _next) => {
-  const status = err.status || 500;
-  const message = err.message || err;
-  console.error(err);
-  res.status(status).send(message);
+// Handler generico para errores del servidor.
+server.use((err, _req, res, next) => {
+  if (res.headersSent) return next(err);
+  console.error(`Unhandled server error: ${err}`);
+  res.status(500).send({
+    code: "internal_server",
+    status: 500,
+    message: err?.message || err.toString(),
+  });
 });
 
 module.exports = server;
