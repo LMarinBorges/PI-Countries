@@ -17,8 +17,14 @@ fs.readdirSync(path.join(__dirname, "models"))
 
 // Definimos relaciones.
 const { Activity, Country } = sequelize.models;
-Activity.belongsToMany(Country, { through: "country_activities" });
-Country.belongsToMany(Activity, { through: "country_activities" });
+Activity.belongsToMany(Country, {
+  through: "country_activities",
+  as: "countries",
+});
+Country.belongsToMany(Activity, {
+  through: "country_activities",
+  as: "activities",
+});
 
 module.exports = {
   ...sequelize.models, // Modelos
