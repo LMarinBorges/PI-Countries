@@ -20,13 +20,13 @@ fs.readdirSync(path.join(__dirname, "models"))
   .forEach((model) => model(sequelize));
 
 // Definimos relaciones.
-const { Activity, Country } = sequelize.models;
+const { Activity, Country, CountryActivities } = sequelize.models;
 Activity.belongsToMany(Country, {
-  through: "country_activities",
+  through: CountryActivities,
   as: "countries",
 });
 Country.belongsToMany(Activity, {
-  through: "country_activities",
+  through: CountryActivities,
   as: "activities",
 });
 

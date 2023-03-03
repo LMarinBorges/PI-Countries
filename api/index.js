@@ -30,9 +30,9 @@ const seedDatabase = async () => {
   if (!response.ok) throw new Error("failed to fetch from countries API");
   const countryData = await response.json();
   const rows = countryData.map((country) => ({
-    id: country.cca3,
+    isoCode: country.cca3,
     name: country.name.common,
-    flagUrl: country.flags[0],
+    flagImage: country.flags[0],
     continent: country.continents[0],
     capital: country.capital?.[0],
     subregion: country.subregion,

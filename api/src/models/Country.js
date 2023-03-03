@@ -4,17 +4,16 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Country",
     {
-      id: {
+      isoCode: {
         type: DataTypes.STRING(3),
-        allowNull: false,
-        primaryKey: true,
         validate: { len: 3 },
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      flagUrl: {
+      flagImage: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -38,6 +37,13 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    { tableName: "countries" }
+    {
+      indexes: [
+        {
+          fields: ["iso_code"],
+          using: "HASH",
+        },
+      ],
+    }
   );
 };

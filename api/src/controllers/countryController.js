@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Country } = require("../db.js");
+const { Country, Activity } = require("../db.js");
 const asyncHandler = require("../helpers/asyncHandler.js");
 const { notFound } = require("../helpers/response.js");
 
@@ -20,7 +20,8 @@ exports.findCountries = asyncHandler(async (req, res) => {
 
 exports.getCountry = asyncHandler(async (req, res) => {
   const { countryId } = req.params;
-  const country = await Country.findByPk(countryId, {
+  const country = await Country.findOne({
+    where: { isoCode: countryId },
     include: "activities",
   });
   if (country === null) return notFound(res, "Country not found.");
