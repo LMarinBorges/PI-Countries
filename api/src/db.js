@@ -23,11 +23,12 @@ fs.readdirSync(path.join(__dirname, "models"))
 const { Activity, Country, CountryActivities } = sequelize.models;
 Activity.belongsToMany(Country, {
   through: CountryActivities,
-  targetKey: "iso_code",
+  targetKey: "isoCode",
   as: "countries",
 });
 Country.belongsToMany(Activity, {
   through: CountryActivities,
+  sourceKey: "isoCode",
   as: "activities",
 });
 
