@@ -8,6 +8,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(3),
         validate: { len: 3 },
         allowNull: false,
+        unique: true,
       },
       name: {
         type: DataTypes.STRING,
