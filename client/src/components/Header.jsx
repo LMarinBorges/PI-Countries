@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Card from "./Card";
 import Navbar from "./Navbar";
 
-const Container = styled(Card)`
+const Container = styled(Card).attrs({ as: "header" })`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,7 +16,7 @@ const Title = styled.div`
 
 export default function Header() {
   return (
-    <Container as="header">
+    <Container>
       <Title>Henry Countries</Title>
       <Navbar />
     </Container>

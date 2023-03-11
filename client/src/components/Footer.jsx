@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Card from "./Card";
 
-const Container = styled(Card)`
+const Container = styled(Card).attrs({ as: "footer" })`
   padding: 16px 24px;
   display: flex;
   justify-content: space-between;
@@ -18,7 +18,7 @@ const FooterMonster = styled(Text)`
 
 export default function Footer() {
   return (
-    <Container as="footer">
+    <Container>
       <FooterMonster>
         <span>🦶🤠🦶</span>
         <span>Soy un footer.</span>
