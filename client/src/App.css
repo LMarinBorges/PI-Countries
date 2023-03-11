@@ -1,0 +1,17 @@
+:root {
+  --black: rgba(0, 0, 0, 0.86);
+  --shadow: rgba(0, 0, 0, 0.18);
+}
+
+body {
+  margin: 0;
+  color: var(--black);
+  background-color: #f3e9db;
+  font-family: "Bitter", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Source Code Pro", monospace;
+}

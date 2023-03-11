@@ -4,6 +4,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import "./App.css";
 import HomePage from "./routes/home";
 import CountryDetails from "./routes/home/$country";
 import NewActivity from "./routes/home/new";
