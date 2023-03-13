@@ -9,7 +9,7 @@ const CardContainer = styled.div`
 `;
 
 export default function CardList() {
-  const { data, filters, search } = useSelector((state) => state);
+  const { data, filters, search, sorting } = useSelector((state) => state);
   return (
     <CardContainer>
       {data.countries
@@ -33,6 +33,23 @@ export default function CardList() {
             search === "" ||
             country.name.toLowerCase().includes(search.toLowerCase())
         )
+        .sort((a, b) => {
+          switch (sorting.field) {
+            case "name": {
+              return sorting.order === "asc"
+                ? a.name.localeCompare(b.name)
+                : b.name.localeCompare(a.name);
+            }
+            case "population": {
+              return sorting.order === "asc"
+                ? a.population - b.population
+                : b.population - a.population;
+            }
+            default: {
+              throw Error(`invalid sorting field: ${sorting.field}`);
+            }
+          }
+        })
         .slice(0, 10)
         .map((country) => (
           <CountryCard
