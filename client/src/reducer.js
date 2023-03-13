@@ -7,8 +7,8 @@ const initialState = {
   currentPage: 1,
   search: "",
   filters: {
-    continents: [],
-    activities: [],
+    continent: null,
+    activity: null,
   },
   sorting: {
     field: "name",
@@ -34,10 +34,10 @@ export default function rootReducer(state = initialState, action) {
       return { ...state, sorting: action.payload };
     }
     case "setFilters": {
-      return { ...state, filters: action.payload };
+      return { ...state, filters: action.payload, currentPage: 1 };
     }
     case "setSearch": {
-      return { ...state, search: action.payload };
+      return { ...state, search: action.payload, currentPage: 1 };
     }
     case "nextPage": {
       return { ...state, currentPage: state.currentPage + 1 };

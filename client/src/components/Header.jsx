@@ -11,7 +11,6 @@ const Container = styled(Card).attrs({ as: "header" })`
 
 const Title = styled.div`
   font-size: 1.45em;
-  margin: 0;
 `;
 
 export default function Header() {

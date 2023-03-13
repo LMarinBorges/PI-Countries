@@ -1,10 +1,12 @@
 const { badRequest, created } = require("../helpers/response.js");
 const asyncHandler = require("../helpers/asyncHandler.js");
-const { Activity, CountryActivities } = require("../db.js");
+const { Country, Activity, CountryActivities } = require("../db.js");
 const validator = require("../validators/activity.js");
 
 exports.listActivities = asyncHandler(async (_req, res) => {
-  const activities = await Activity.findAll();
+  const activities = await Activity.findAll({
+    include: { model: Country, as: "countries" },
+  });
   res.json(activities);
 });
 

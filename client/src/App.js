@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { loadData, loadFailed } from "./actions";
 import "./App.css";
 import Card from "./components/Card";
+import Index from "./routes/home/index";
 import HomePage from "./routes/home";
 import CountryDetails from "./routes/home/$country";
 import NewActivity from "./routes/home/new";
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<LandingPage />} />,
     <Route path="/home" element={<HomePage />}>
+      <Route index element={<Index />} />
       <Route path="activities/new" element={<NewActivity />} />
       <Route path="countries/:country" element={<CountryDetails />} />
     </Route>,
