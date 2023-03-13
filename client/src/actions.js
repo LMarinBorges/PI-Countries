@@ -1,10 +1,14 @@
-export const dataLoaded = (payload) => ({
-  type: "dataLoaded",
+export const loadFailed = () => ({
+  type: "loadFailed",
+});
+
+export const loadData = (payload) => ({
+  type: "loadData",
   payload,
 });
 
-export const reloadActivities = (payload) => ({
-  type: "reloadActivities",
+export const loadActivities = (payload) => ({
+  type: "loadActivities",
   payload,
 });
 

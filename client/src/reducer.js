@@ -1,5 +1,6 @@
 const initialState = {
   data: {
+    state: "loading",
     countries: [],
     activities: [],
   },
@@ -17,13 +18,16 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case "dataLoaded": {
+    case "loadFailed": {
+      return { ...state, data: { ...state.data, state: "failed" } };
+    }
+    case "loadData": {
       return {
         ...state,
-        data: action.payload,
+        data: { ...action.payload, state: "loaded" },
       };
     }
-    case "reloadActivities": {
+    case "loadActivities": {
       return { ...state, data: { ...state.data, activities: action.payload } };
     }
     case "setSorting": {
